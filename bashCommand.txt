@@ -1,0 +1,11 @@
+Initiate docker deskopt:
+docker run --name hpc-env -v /Users/claudio/Lab/AMSC00:/home/jellyfish/shared-folder -it --platform=linux/amd64 -d pcafrica/mk
+
+Exec:
+docker exec -it hpc-env /bin/bash
+
+Compile:
+g++ -I ${mkEigenInc} eigen-test1.cpp -o test1
+mpicc −DUSE_MPI −I${mkLisInc} −L${mkLisLib} −llis etest1.c −o eigen1
+mpirun −n 4 ./eigen1 Aex2.mtx eigvec.mtx hist.txt −e pi −emaxiter 50000 −etol 1.e−7
+

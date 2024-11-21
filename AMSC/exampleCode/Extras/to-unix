@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# A simple utility to transform a windows text file to a
+# unix text file, strimming out te hideous cr/lf pair.
+# For safety, it keeps the old file(s) by adding the suffix
+# .backup. You can remove them if everything is ok (and normally it is).
+# The script make sure that the converted file keeps permissions and
+# modification times as the original one. The only difference is the way
+# newline is represented.
+#
+SUFFIX=backup
+for f in $*; do
+   echo $f
+   TMPFILE=${f}.${SUFFIX}
+   tr -d \\r < $f > $TMPFILE
+   chmod --reference=$f $TMPFILE
+   touch --reference=$f $TMPFILE
+   cp --preserve=all $TMPFILE $f
+   # comment out if you want to remove backup file
+   #   /bin/rm -f $TMPFILE 
+done
+

@@ -15,7 +15,7 @@
 CXXFLAGS+=-std=c++20
 MAKEFILEH_DIR=../../
 #
-include $(MAKEFILEH_DIR)/Makefile.inc
+# include $(MAKEFILEH_DIR)/Makefile.inc
 #
 # You may have an include file also in the current directory
 #
